@@ -1,10 +1,11 @@
 version: 2.1
 jobs:
   build:
-    environment: 
-      IMAGE_NAME: lu97is/nonubereats
-      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
-      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+    docker:
+      environment: 
+        IMAGE_NAME: lu97is/nonubereats
+        DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
+        DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
     working_directory: ~/app
     steps:
       - checkout
