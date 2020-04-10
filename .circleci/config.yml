@@ -43,10 +43,12 @@ workflows:
   build-master:
     jobs:
       - build
-      - test
-      - publish:
+      - test:
           requires:
             - build
+      - publish:
+          requires:
+            - test
           filters:
             branches:
               only: master
