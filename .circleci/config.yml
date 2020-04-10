@@ -18,11 +18,12 @@ jobs:
             docker build -t $IMAGE_NAME:latest -f Dockerfile.dev .
       - run:
           name: Archive Docker image
-          command: docker save -o image.tar $IMAGE_NAME
-        - persist_to_workspace:
-          root: .
-          paths:
-            - ./image.tar
+          command: |
+            docker save -o image.tar $IMAGE_NAME
+      - persist_to_workspace:
+        root: .
+        paths:
+          - ./image.tar
   test:
     executor: docker-publisher
     steps:
