@@ -44,7 +44,7 @@ workflows:
     jobs:
       - build
       - test
-      - publisher:
+      - publish:
           requires:
             - build
           filters:
