@@ -6,6 +6,7 @@ jobs:
         IMAGE_NAME: lu97is/nonubereats
         DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
         DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+      image: $IMAGE_NAME
     working_directory: ~/app
     steps:
       - checkout
