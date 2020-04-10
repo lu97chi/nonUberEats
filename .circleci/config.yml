@@ -16,15 +16,38 @@ jobs:
           name: Building docker image
           command: |
             docker build -t $IMAGE_NAME:latest -f Dockerfile.dev .
+  test:
+    executor: docker-publisher
+    steps:
       - run:
           name: Testing docker image
           command: |
-            docker run -e CI=true $IMAGE_NAME npm test 
+            docker run -e CI=true $IMAGE_NAME npm test
+  publish:
+    executor: docker-publisher
+    steps:
+      - run:
+          name: Minified version
+          command: |
+            docker build -t $IMAGE_NAME:latest .
       - run:
           name: Login to docker
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       - run:
-          name: Push image
+          name: Publish to docker
           command: |
             docker push $IMAGE_NAME
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build
+      - test
+      - publisher:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      
