@@ -15,16 +15,10 @@ jobs:
           name: Building docker image
           command: |
             docker build -t $IMAGE_NAME:latest -f Dockerfile.dev .
-  test-image:
-    executor: docker-publisher
-    steps:
       - run:
           name: Testing docker image
           command: |
-            docker run -e CI=true $IMAGE_NAME npm test
-  push-image:
-    executor: docker-publisher
-    steps:
+            docker run -e CI=true $IMAGE_NAME npm test 
       - run:
           name: Publish image
           command: |
