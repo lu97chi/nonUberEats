@@ -2,8 +2,8 @@ version: 2.1
 executors:
   docker-publisher:
     environment:
-      IMAGE_NAME: lu97is/nonubereats-frontend
-      FOLDER_NAME: nonubereats-frontend
+      IMAGE_NAME: lu97is/nonubereats
+      IMAGE_NAME_PROD: lu97is/nonubereats-frontend
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Minified version
           command: |
-            docker build -t $IMAGE_NAME:latest .
+            docker build -t $IMAGE_NAME_PROD:latest .
       - run:
           name: Login to docker
           command: |
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Publish to docker
           command: |
-            docker push $IMAGE_NAME
+            docker push $IMAGE_NAME_PROD
 workflows:
   version: 2
   build-master:
