@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bit/nonubereats.nonubereats.button": "0.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -21,7 +22,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
-    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}"
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "add": "bit add src/components/$NAME",
+    "addtest": "bit add src/components/$NAME --tests src/components/$NAME/test/*.test.tsx",
+    "push": "bit export nonubereats.nonubereats"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,5 +69,13 @@
     "prettier": "2.0.4",
     "prettier-eslint": "9.0.1",
     "prettier-eslint-cli": "5.0.0"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react-typescript@3.1.51",
+      "tester": "bit.envs/testers/jest@22.4.3"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }
