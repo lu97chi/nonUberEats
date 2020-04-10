@@ -1,10 +1,27 @@
 version: 2.1
 jobs:
   build:
-    run:
-      name: Building image
-      command: docker build -t lu97is/nonubereats -f Dockerfile.dev
-  test:
-    run:
-      name: Testing files
-      command: docker run -e CI=true lu97is/nonubereats npm run test
+    environment: 
+      IMAGE_NAME: lu97is/nonubereats
+      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
+      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+    working_directory: ~/app
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Building docker image
+          command: |
+            docker build -f Dockerfile.dev -t $IMAGE_NAME
+      - run:
+          name: Testing docker image
+          command: |
+            docker run -e CI=true $IMAGE_NAME npm test
+      - run:
+          name: Publish image to docker
+          command: |
+            IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
+            sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+            sudo docker tag $IMAGE:latest $IMAGE_NAME
+            sudo docker push $IMAGE_NAME
