@@ -21,9 +21,6 @@ jobs:
           command: |
             docker run -e CI=true $IMAGE_NAME npm test 
       - run:
-          name: Rebuild image in the correct folder
-          command: docker build -t $IMAGE_NAME ./$FOLDER_NAME
-      - run:
           name: Login to docker
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
