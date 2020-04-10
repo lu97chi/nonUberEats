@@ -3,6 +3,7 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: lu97is/nonubereats-frontend
+      FOLDER_NAME: nonubereats-frontend
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
@@ -20,6 +21,13 @@ jobs:
           command: |
             docker run -e CI=true $IMAGE_NAME npm test 
       - run:
-          name: Publish image
+          name: Rebuild image in the correct folder
+          command: docker build -t $IMAGE_NAME ./$FOLDER_NAME
+      - run:
+          name: Login to docker
           command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin docker push $IMAGE_NAME:latest
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run:
+          name: Push image
+          command: |
+            echo docker push $IMAGE_NAME
