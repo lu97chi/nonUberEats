@@ -27,4 +27,4 @@ jobs:
       - run:
           name: Push image
           command: |
-            echo docker push $IMAGE_NAME
+            docker push $IMAGE_NAME
