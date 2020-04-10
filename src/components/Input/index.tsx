@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@bit/nonubereats.nonubereats.button';
+import Button from '../Button';
 
 const Input = () => (
   <div>
