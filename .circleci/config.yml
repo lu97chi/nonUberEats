@@ -13,23 +13,20 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-        name: Building docker image
-        command: |
-          docker build -t $IMAGE_NAME:latest -f Dockerfile.dev .
+          name: Building docker image
+          command: |
+            docker build -t $IMAGE_NAME:latest -f Dockerfile.dev .
   test-image:
     executor: docker-publisher
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - setup_remote_docker
-      run:
-        name: Testing docker image
-        command: |
-          docker run -e CI=true $IMAGE_NAME npm test
+      - run:
+          name: Testing docker image
+          command: |
+            docker run -e CI=true $IMAGE_NAME npm test
   push-image:
     executor: docker-publisher
     steps:
-      run:
-        name: Publish image
-        command: |
-          echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin docker push $IMAGE_NAME:latest
+      - run:
+          name: Publish image
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin docker push $IMAGE_NAME:latest
