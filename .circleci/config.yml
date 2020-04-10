@@ -2,11 +2,11 @@ version: 2.1
 jobs:
   build:
     docker:
+      image: node:alpine
       environment: 
         IMAGE_NAME: lu97is/nonubereats
         DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
         DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
-      image: $IMAGE_NAME
     working_directory: ~/app
     steps:
       - checkout
