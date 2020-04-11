@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bit/nonubereats.nonubereats.button": "0.0.2",
-    "@bit/nonubereats.nonubereats.input": "0.0.2",
+    "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -12,9 +12,15 @@
     "@types/node": "^12.12.35",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "@types/react-router-dom": "^5.1.4",
+    "i18next": "^19.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.3.4",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "styled-components": "^5.1.0",
+    "typeface-roboto": "0.0.75",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -33,7 +39,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "CI=true npm run test && npm run lint",
+      "pre-commit": "CI=true npm run lint",
       "pre-push": "CI=true npm run test && npm run lint"
     }
   },
@@ -50,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@types/styled-components": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "2.27.0",
     "@typescript-eslint/parser": "2.27.0",
     "babel-eslint": "10.1.0",
@@ -70,13 +77,5 @@
     "prettier": "2.0.4",
     "prettier-eslint": "9.0.1",
     "prettier-eslint-cli": "5.0.0"
-  },
-  "bit": {
-    "env": {
-      "compiler": "bit.envs/compilers/react-typescript@3.1.51",
-      "tester": "bit.envs/testers/jest@22.4.3"
-    },
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
   }
 }
