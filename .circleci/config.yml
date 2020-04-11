@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Minified version and deploy
           command: |
-            docker build -t  $IMAGE_NAME_PROD:latest --build-arg FIREBASE_AUTH_TOKEN=${FIREBASE_AUTH_TOKEN} .
+            docker build -t $IMAGE_NAME_PROD:latest --build-arg FIREBASE_AUTH_TOKEN=$FIREBASE_AUTH_TOKEN .
       - run:
           name: Login to docker
           command: |

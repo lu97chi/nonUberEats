@@ -1,5 +1,5 @@
-ARG FIREBASE_AUTH_TOKEN
 FROM node:alpine
+ARG FIREBASE_AUTH_TOKEN
 WORKDIR '/app'
 COPY package.json .
 RUN npm config set @bit:registry https://node.bit.dev
