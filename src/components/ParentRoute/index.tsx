@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 type Props = {
   routes: RoutesTypes;
@@ -13,7 +13,6 @@ export type RoutesTypes = Array<{
 }>;
 
 const ParentRoute = ({ routes }: Props) => {
-  console.log(routes);
   return (
     <Switch>
       {routes.map(({ path, Component, main, exact }) => {
