@@ -20,15 +20,15 @@ jobs:
           name: Testing docker image
           command: |
             docker run -e CI=true $IMAGE_NAME npm test
-  publish:
+  deploy:
     executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Minified version
+          name: Minified version and deploy
           command: |
-            docker build -t $IMAGE_NAME_PROD:latest .
+            docker build -t  $IMAGE_NAME_PROD:latest --build-arg FIREBASE_AUTH_TOKEN=${FIREBASE_AUTH_TOKEN} .
       - run:
           name: Login to docker
           command: |
@@ -37,31 +37,16 @@ jobs:
           name: Publish to docker
           command: |
             docker push $IMAGE_NAME_PROD
-  deploy:
-    executor: docker-publisher
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Deploy to firebase
-          command: |
-            firebase deploy --token $FIREBASE_AUTH_TOKEN
 workflows:
   version: 2
   build-master:
     jobs:
       - build
-      - publish:
+      - deploy:
           requires:
             - build
           filters:
             branches:
               only: master
-      - deploy:
-            requires:
-                - publish
-            filters:
-                branches:
-                    only: master
     
       
