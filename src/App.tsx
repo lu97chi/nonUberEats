@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './App.css';
+import { Button } from '@material-ui/core';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -22,6 +23,7 @@ function App() {
         >
           Learn React
         </a>
+        <Button>Hello</Button>
       </header>
     </div>
   );
