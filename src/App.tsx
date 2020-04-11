@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './App.css';
 import { Button } from '@material-ui/core';
+import './App.css';
 
 function App() {
   const { t, i18n } = useTranslation();
